@@ -51,6 +51,9 @@ rank_cases <- function(x){
 load("~/Library/CloudStorage/OneDrive-Personal/automatic_read_sinave/8.RData/den/den2008_2022.RData")
 
 z <- den2008_2015  |>
+    dplyr::filter(!DES_EDO.x %in% c("OTROS PAISES", 
+                                      "OTROS PAISES DE LATINOAMERICA",
+                                      "ESTADOS UNIDOS DE NORTEAMERICA")) |>
     dplyr::filter(DES_DIAG_FINAL %in% c("FIEBRE HEMORRAGICA POR DENGUE", "FIEBRE POR DENGUE")) |>
     dplyr::group_by(DES_EDO.x, ANO) |>
     dplyr::summarise(value = dplyr::n(), .groups = "drop") |>
@@ -116,6 +119,7 @@ zyw <- dplyr::bind_rows(z, y, w)
 col <- viridis::magma(n = length(unique(zyw$CVE_EDO_RES)))
 col[31]  <- "#2EB67D"
 
+
 ggplot2::ggplot(data = zyw,
                 ggplot2:::aes(ANO, 
                               rank, 
@@ -145,11 +149,6 @@ ggplot2::ggplot(data = zyw,
                   x = "") +
     ggplot2::scale_y_reverse() +
     ggplot2::scale_color_manual(values = col)
-
-
-               
-
-
 ```
 
 
