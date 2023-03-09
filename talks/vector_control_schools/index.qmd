@@ -23,7 +23,7 @@ highlight-style: a11y
 <h4> `r fontawesome::fa("github", "black")` &nbsp; [github.com/fdzul](https://fdzul.github.io/web_site_fadm/)
 
 
-![](https://fdzul.github.io/manual_hotspots/images/cover.jpg){.absolute top=205 left=500 width="300"}
+![](chains_merida.jpg){.absolute top=205 left=500 width="300"}
 
 
 
