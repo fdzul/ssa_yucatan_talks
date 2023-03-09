@@ -124,7 +124,7 @@ ggplot2::ggplot(data = zyw,
                 ggplot2:::aes(ANO, 
                               rank, 
                               color = CVE_EDO_RES)) +
-    ggplot2::geom_point(size = 2) +
+    ggplot2::geom_point(size = 4) +
     ggplot2::geom_text(data = zyw |> 
                            dplyr::filter(ANO == min(ANO)),
                        ggplot2::aes(x = ANO - .1, 
@@ -139,7 +139,7 @@ ggplot2::ggplot(data = zyw,
                        size = 1.5, 
                        nudge_x = 0.1,
                        hjust = 0) +
-    ggbump::geom_bump(size = 1, smooth = 8) +
+    ggbump::geom_bump(size = 3, smooth = 8) +
     ggplot2::scale_x_continuous(breaks = seq(1, max(zyw$ANO), 1)) +
     cowplot::theme_minimal_grid(font_size = 14, 
                                 line_size = 0) +
