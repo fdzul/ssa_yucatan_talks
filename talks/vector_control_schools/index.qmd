@@ -26,8 +26,6 @@ highlight-style: a11y
 ![](chains_merida.jpg){.absolute top=155 left="550" width="750"}
 
 
-
-
 ## <span style="color:#003300;">Transmisión del Dengue en México</span>
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
@@ -39,6 +37,120 @@ highlight-style: a11y
 
 ## <span style="color:#003300;">Estados Prioritarios</span>
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+```{r}
+library(dplyr)
+rank_cases <- function(x){
+    x |>
+        dplyr::arrange(dplyr::desc(value)) |>
+        dplyr::mutate(rank = 1:dplyr::n())
+}
+
+
+# Step 1. load the dengue dataset 2008 to 2015 ####
+load("~/Library/CloudStorage/OneDrive-Personal/automatic_read_sinave/8.RData/den/den2008_2022.RData")
+
+z <- den2008_2015  |>
+    dplyr::filter(DES_DIAG_FINAL %in% c("FIEBRE HEMORRAGICA POR DENGUE", "FIEBRE POR DENGUE")) |>
+    dplyr::group_by(DES_EDO.x, ANO) |>
+    dplyr::summarise(value = dplyr::n(), .groups = "drop") |>
+    as.data.frame() |>
+    dplyr::group_by(ANO) |>
+    dplyr::rename(DES_EDO_RES = DES_EDO.x) |>
+    dplyr::mutate(CVE_EDO_RES = DES_EDO_RES) |>
+    #dplyr::mutate(rank = rank(value, ties.method = "random"))|> 
+    tidyr::nest() |>
+    dplyr::mutate(rank = purrr::map(data,
+                                    rank_cases)) |>
+    dplyr::select(-data) |>
+    tidyr::unnest(cols = c(rank)) |>
+    dplyr::mutate(ANO = as.numeric(ANO)) |>
+    as.data.frame()
+
+y <- den2016_2022 |>
+    dplyr::filter(!DES_EDO_RES %in% c("OTROS PAISES", 
+                                      "OTROS PAISES DE LATINOAMERICA",
+                                      "ESTADOS UNIDOS DE NORTEAMERICA")) |>
+    dplyr::filter(DES_DIAG_FINAL %in% 
+                      c("DENGUE CON SIGNOS DE ALARMA", 
+                        "DENGUE NO GRAVE", 
+                        "DENGUE GRAVE")) |>
+    dplyr::group_by(DES_EDO_RES, ANO) |>
+    dplyr::summarise(value = dplyr::n(), .groups = "drop") |>
+    dplyr::group_by(ANO) |>
+    dplyr::mutate(CVE_EDO_RES = DES_EDO_RES) |>
+    #dplyr::mutate(rank = rank(value, ties.method = "random"))|> 
+    tidyr::nest() |>
+    dplyr::mutate(rank = purrr::map(data,
+                                    rank_cases)) |>
+    dplyr::select(-data) |>
+    tidyr::unnest(cols = c(rank)) |>
+    dplyr::mutate(ANO = as.numeric(ANO)) |>
+    as.data.frame()
+
+
+w <-  boldenr::read_dataset_bol(path = "~/Library/CloudStorage/OneDrive-Personal/datasets/DGE/arbo/",
+                                     dataset = "sinave")  |>
+    dplyr::filter(!DES_EDO_RES %in% c("OTROS PAISES", 
+                                      "OTROS PAISES DE LATINOAMERICA",
+                                      "ESTADOS UNIDOS DE NORTEAMERICA")) |>
+    dplyr::filter(DES_DIAG_FINAL %in% 
+                      c("DENGUE CON SIGNOS DE ALARMA", 
+                        "DENGUE NO GRAVE", 
+                        "DENGUE GRAVE")) |>
+    dplyr::group_by(DES_EDO_RES, ANO) |>
+    dplyr::summarise(value = dplyr::n(), .groups = "drop") |>
+    dplyr::group_by(ANO) |>
+    dplyr::mutate(CVE_EDO_RES = DES_EDO_RES) |>
+    #dplyr::mutate(rank = rank(value, ties.method = "random"))|> 
+    tidyr::nest() |>
+    dplyr::mutate(rank = purrr::map(data,
+                                    rank_cases)) |>
+    dplyr::select(-data) |>
+    tidyr::unnest(cols = c(rank)) |>
+    dplyr::mutate(ANO = as.numeric(ANO)) |>
+    as.data.frame()
+
+zyw <- dplyr::bind_rows(z, y, w)
+
+col <- viridis::magma(n = length(unique(zyw$CVE_EDO_RES)))
+col[31]  <- "#2EB67D"
+
+ggplot2::ggplot(data = zyw,
+                ggplot2:::aes(ANO, 
+                              rank, 
+                              color = CVE_EDO_RES)) +
+    ggplot2::geom_point(size = 2) +
+    ggplot2::geom_text(data = zyw |> 
+                           dplyr::filter(ANO == min(ANO)),
+                       ggplot2::aes(x = ANO - .1, 
+                                    label = CVE_EDO_RES), 
+                       size = 1.5, 
+                       nudge_x = -0.1,
+                       hjust = 1) +
+    ggplot2::geom_text(data = zyw |> 
+                           dplyr::filter(ANO == max(ANO)),
+                       ggplot2::aes(x = ANO + .1, 
+                                    label = CVE_EDO_RES), 
+                       size = 1.5, 
+                       nudge_x = 0.1,
+                       hjust = 0) +
+    ggbump::geom_bump(size = 1, smooth = 8) +
+    ggplot2::scale_x_continuous(breaks = seq(1, max(zyw$ANO), 1)) +
+    cowplot::theme_minimal_grid(font_size = 14, 
+                                line_size = 0) +
+    ggplot2::theme(legend.position = "none",
+                   panel.grid.major = ggplot2::element_blank()) +
+    ggplot2::labs(y = "Posición de Casos Confirmados de Dengue",
+                  x = "") +
+    ggplot2::scale_y_reverse() +
+    ggplot2::scale_color_manual(values = col)
+
+
+               
+
+
+```
 
 
 ## <span style="color:#003300;">Transmisión del Dengue en Yucatán</span>
