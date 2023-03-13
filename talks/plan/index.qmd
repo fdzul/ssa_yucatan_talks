@@ -9,18 +9,47 @@ format:
 highlight-style: a11y
 ---
 
-<h2>Plan de Abordaje<br>en Escuelas  en Zonas de Alto Riesgo de Transmisión de Dengue</h2>
+<h2>Plan de Abordaje<br>en Escuelas en Zonas de Alto Riesgo de Transmisión de Dengue</h2>
 
-<h2> </h2>
+<h2>
+
+</h2>
 
 <hr>
 
-<h3> Felipe Dzul Manzanilla </h3><h3>Jorge Palacios</h3> <h3></h3>
+<h3>Jorge Palacio Vargas</h3>
 
-<h4> 2023-03-13 </h4>
+<h3></h3>
+
+<h3>
+
+</h3>
+
+<h4>2023-03-13</h4>
+
 <br>
 
-
-## <span style="color:#003300;">Objetivo General</span>
+## [Objetivo General]{style="color:#003300;"}
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
+Implementar Acciones de Prevención y Control en Planteles Educativos en Zonas de Alto Riesgo de Transmisión de Dengue
+
+## [Objetivos Específicos]{style="color:#003300;"}
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+- Realizar la capacitación al personal de docente y de intendencias en los Planteles Educativos en Zonas de Alto Riesgo de Transmisión de Dengue
+
+- Realizar Control Físico y Control Larvario en los Planteles Educativos en Zonas de Alto Riesgo de Transmisión de Dengue en colaboración con personal docente y de intendencia.
+
+- Realizar rociado residual en los Planteles Educativos en Zonas de Alto Riesgo de Transmisión de Dengue posterior a la capación y el control larvario
+
+
+## [Compromisos]{style="color:#003300;"}
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+- SEGEY 
+
+  El personal de los Planteles Educativos en Zonas de Alto Riesgo de Transmisión de Dengue replicarán la capacitación en la comunidad infantil y los commites de padres de familia.
+  
+  
+  
