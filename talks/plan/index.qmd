@@ -37,11 +37,18 @@ Implementar Acciones de Prevención y Control en Planteles Educativos en Zonas d
 ## [Objetivos Específicos]{style="color:#003300;"}
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
-- Realizar la capacitación al personal de docente y de intendencias en los Planteles Educativos en Zonas de Alto Riesgo de Transmisión de Dengue
+- Realizar la capacitación al personal docente y de intendencias en los Planteles Educativos en Zonas de Alto Riesgo de Transmisión de Dengue
 
 - Realizar Control Físico y Control Larvario en los Planteles Educativos en Zonas de Alto Riesgo de Transmisión de Dengue en colaboración con personal docente y de intendencia.
 
-- Realizar rociado residual en los Planteles Educativos en Zonas de Alto Riesgo de Transmisión de Dengue posterior a la capación y el control larvario
+- Realizar rociado residual en los Planteles Educativos en Zonas de Alto Riesgo de Transmisión de Dengue posterior a la capacitación y el control larvario
+
+
+## [Metodología]{style="color:#003300;"}
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+
+
 
 
 ## [Compromisos]{style="color:#003300;"}
@@ -49,7 +56,18 @@ Implementar Acciones de Prevención y Control en Planteles Educativos en Zonas d
 
 - SEGEY 
 
-  El personal de los Planteles Educativos en Zonas de Alto Riesgo de Transmisión de Dengue replicarán la capacitación en la comunidad infantil y los commites de padres de familia.
+  - El personal de los Planteles Educativos en Zonas de Alto Riesgo de Transmisión de Dengue replicarán la capacitación en la comunidad infantil y en los comites de padres de familia.
   
   
+## [Compromisos]{style="color:#003300;"}
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+- Salud 
+
+  - Realizar Control Físico y Control Larvario en los Planteles Educativos en Zonas de Alto Riesgo de Transmisión de Dengue en colaboración con personal docente y de intendencia.
+  
+  - Realizar rociado residual en los Planteles Educativos en Zonas de Alto Riesgo de Transmisión de Dengue posterior a la capacitación y el control larvario.
+
+
+
   
