@@ -343,6 +343,46 @@ Jorge Palacio Vargas
 </h4>
 <p><br></p>
 </section>
+<section id="área-de-oportunidad" class="slide level2">
+<h2><span style="color:#003300;">Área de Oportunidad </span></h2>
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<ul>
+<li><h4>
+La distribución de la carga de la enfermedad por grupo etario del 2022 permite identificar que los grupos etarios entre 10 y 24 años de edad contribuyen con el 53% de la transmisión de dengue en el área urbana de Mérida.
+</h4></li>
+</ul>
+</div>
+<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="área-de-oportunidad-1" class="slide level2">
+<h2><span style="color:#003300;">Área de Oportunidad </span></h2>
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<ul>
+<li><h4>
+La carga de la enfermedad en grupos escolares obliga al sistema de salud a desarrollar e implemementar estrategias focalizadas de prevención y control del dengue.
+</h4></li>
+</ul>
+</div>
+<div class="cell quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
 <section id="objetivo-general" class="slide level2">
 <h2><span style="color:#003300;">Objetivo General</span></h2>
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
@@ -356,10 +396,6 @@ Jorge Palacio Vargas
 <li><p>Realizar Control Físico y Control Larvario en los Planteles Educativos en Zonas de Alto Riesgo de Transmisión de Dengue en colaboración con personal docente y de intendencia.</p></li>
 <li><p>Realizar rociado residual en los Planteles Educativos en Zonas de Alto Riesgo de Transmisión de Dengue posterior a la capacitación y el control larvario</p></li>
 </ul>
-</section>
-<section id="metodología" class="slide level2">
-<h2><span style="color:#003300;">Metodología</span></h2>
-<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 </section>
 <section id="compromisos" class="slide level2">
 <h2><span style="color:#003300;">Compromisos</span></h2>
@@ -379,6 +415,17 @@ Jorge Palacio Vargas
 <ul>
 <li><p>Realizar Control Físico y Control Larvario en los Planteles Educativos en Zonas de Alto Riesgo de Transmisión de Dengue en colaboración con personal docente y de intendencia.</p></li>
 <li><p>Realizar rociado residual en los Planteles Educativos en Zonas de Alto Riesgo de Transmisión de Dengue posterior a la capacitación y el control larvario.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="segimiento" class="slide level2">
+<h2><span style="color:#003300;">Segimiento</span></h2>
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+<ul>
+<li><p>Vectores</p>
+<ul>
+<li><p>Vigilancia Entomológica con Ovitrampas.</p></li>
+<li><p>Estudios de Encuesta y Verificación.</p></li>
 </ul></li>
 </ul>
 
@@ -597,6 +644,44 @@ Jorge Palacio Vargas
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

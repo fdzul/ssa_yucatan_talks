@@ -29,6 +29,51 @@ highlight-style: a11y
 
 <br>
 
+
+## <span style="color:#003300;">Área de Oportunidad </span>
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+::: {layout-ncol="2"}
+
+- <h4>La distribución de la carga de la enfermedad por grupo etario del 2022 permite identificar que los grupos etarios entre 10 y 24 años de edad contribuyen con el 53% de la transmisión de dengue en el área urbana de Mérida.</h4>
+
+```{r}
+# Step 1. load the dengue dataset ####
+load("~/OneDrive/automatic_read_sinave/8.RData/den/den2008_2022.RData")
+
+# Step 2. load the function #####
+source("~/Library/CloudStorage/Dropbox/r_developments/r_talks/2023/ssa_yucatan_talks/talks/vector_control_schools/piramyd_plot.R")
+
+pyramid(x = den2016_2022,
+        year = "2022")
+
+```
+
+:::
+
+
+## <span style="color:#003300;">Área de Oportunidad </span>
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+::: {layout-ncol="2"}
+
+- <h4>La carga de la enfermedad en grupos escolares obliga al sistema de salud a desarrollar e implemementar estrategias focalizadas de prevención y control del dengue.</h4>
+
+```{r}
+# Step 1. load the dengue dataset ####
+load("~/OneDrive/automatic_read_sinave/8.RData/den/den2008_2022.RData")
+
+# Step 2. load the function #####
+source("~/Library/CloudStorage/Dropbox/r_developments/r_talks/2023/ssa_yucatan_talks/talks/vector_control_schools/piramyd_plot.R")
+
+pyramid(x = den2016_2022,
+        year = "2022")
+
+```
+
+:::
+
+
 ## [Objetivo General]{style="color:#003300;"}
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
@@ -42,13 +87,6 @@ Implementar Acciones de Prevención y Control en Planteles Educativos en Zonas d
 - Realizar Control Físico y Control Larvario en los Planteles Educativos en Zonas de Alto Riesgo de Transmisión de Dengue en colaboración con personal docente y de intendencia.
 
 - Realizar rociado residual en los Planteles Educativos en Zonas de Alto Riesgo de Transmisión de Dengue posterior a la capacitación y el control larvario
-
-
-## [Metodología]{style="color:#003300;"}
-<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
-
-
-
 
 
 ## [Compromisos]{style="color:#003300;"}
@@ -69,5 +107,16 @@ Implementar Acciones de Prevención y Control en Planteles Educativos en Zonas d
   - Realizar rociado residual en los Planteles Educativos en Zonas de Alto Riesgo de Transmisión de Dengue posterior a la capacitación y el control larvario.
 
 
+  
+## [Segimiento]{style="color:#003300;"}
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+- Vectores
+
+   - Vigilancia Entomológica con Ovitrampas.
+   
+   - Estudios de Encuesta y Verificación.
+   
+   
 
   
