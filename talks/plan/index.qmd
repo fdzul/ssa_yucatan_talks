@@ -4,7 +4,7 @@ format:
     #theme: ["theme/q-theme.scss"]
     slide-number: c/t
     logo: "https://salud.yucatan.gob.mx/files/get/2889?v=1669754780"
-    footer: "[github.com/fdzul](https://joyful-palmier-ec5e33.netlify.app/talks/vector_control_schools/#/)"
+    footer: "[github.com/fdzul](https://joyful-palmier-ec5e33.netlify.app/talks/plan/#/)"
     center-title-slide: true
 highlight-style: a11y
 ---

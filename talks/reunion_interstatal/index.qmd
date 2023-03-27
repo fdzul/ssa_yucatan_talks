@@ -1,0 +1,40 @@
+---
+format: 
+  revealjs:
+    #theme: ["theme/q-theme.scss"]
+    slide-number: c/t
+    logo: "https://salud.yucatan.gob.mx/files/get/2889?v=1669754780"
+    footer: "[github.com/fdzul](https://joyful-palmier-ec5e33.netlify.app/talks/vector_control_schools/#/)"
+    center-title-slide: true
+highlight-style: a11y
+---
+
+<h2>Prevención y Control del Dengue<br>en Escuelas de Mérida Yucatán</h2>
+
+<h2> </h2>
+
+<hr>
+
+<h3> Felipe Dzul Manzanilla </h3><h3>Jorge Palacios</h3> <h3></h3>
+
+<h4> 2023-03-13 </h4>
+<br>
+
+<h4> `r fontawesome::fa("github", "black")` &nbsp; [github.com/fdzul](https://fdzul.github.io/web_site_fadm/)
+
+
+![](chains_merida.jpg){.absolute top=155 left="550" width="750"}
+
+
+
+## Dios Botic!
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+&nbsp;
+
+- ***Bio*** : https://fdzul.github.io/web_site_fadm/
+
+- ***email***       :     [felipe.dzul.m@gmail.com]()
+
+- ***celular***     :     [8139945623]()
+
+- ***slides***:     https://joyful-palmier-ec5e33.netlify.app/talks/reunion_interstatal/#/
