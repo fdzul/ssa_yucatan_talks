@@ -152,6 +152,7 @@ ggplot2::ggplot(data = zyw,
 ```
 
 
+
 ## <span style="color:#003300;">Transmisión del Dengue en Yucatán</span>
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
@@ -164,7 +165,9 @@ Mérida
 
 :::
 
+
 ## <span style="color:#003300;">Dengue por Grupos Etarios</span> ($\color{#2EB67D}{H}$ & $\color{#E01E5A}{M}$)
+
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
 ```{r}

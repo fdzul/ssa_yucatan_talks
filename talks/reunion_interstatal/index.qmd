@@ -25,18 +25,22 @@ highlight-style: a11y
 
 ![](chains_merida.jpg){.absolute top=155 left="550" width="750"}
 
-## Panorama Epidemiológico
+## <span style="color:#003300;">Panorama Epidemiológico</span>
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
-![](wavelet_analysis.png)
+:::{.column}
 
-## Panorama Epidemiológico
+![](wavelet_analysis.png){.absolute top=100 width="800" height="550" right=120}
+
+:::
+
+## <span style="color:#003300;">Panorama Epidemiológico</span>
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 &nbsp;
 
 
 
-## Dios Botic!
+## <span style="color:#003300;">Dios Botic</span>
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 &nbsp;
 
