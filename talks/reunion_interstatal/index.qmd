@@ -463,25 +463,6 @@ cl_mapview(cl_dataset = cl_yuc,
 ## [Control de Probables (Mérida)]{style="color:#003300;"}
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
-::: grid
-::: g-col-6
-[**2022**]{style="color:#660033;font-size:100%"}
-```{r cp_merida_2022}
-# Step 1. define the path ####
-path <- "/Users/fdzul/Library/CloudStorage/OneDrive-Personal/datasets/CENAPRECE/2022/31_yucatan/"
-
-# Step 2. load the function ####
-source("~/Library/CloudStorage/Dropbox/r_developments/r_new_functions/3.Functions/boldenr/control_probables_graph.R")
-
-# Step 3. run the function ####
-control_probables_graph(path = path,
-                        cve_edo = "31",
-                        js = "Mérida")
-```
-:::
-
-::: g-col-6
-[**2023**]{style="color:#660033;font-size:100%"}
 ```{r cp_merida_2023}
 # Step 1. define the path ####
 path <- "/Users/fdzul/Library/CloudStorage/OneDrive-Personal/datasets/CENAPRECE/2023/31_yucatan/"
@@ -494,37 +475,10 @@ control_probables_graph(path = path,
                         cve_edo = "31",
                         js = "Mérida")
 ```
-:::
 
-:::
 
 ## [Control de Probables (Valladolid)]{style="color:#003300;"}
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
-
-<html>
-<head>
-</head>
-<body>
-
-::: grid
-::: g-col-6
-[**2022**]{style="color:#660033;font-size:100%"}
-```{r cp_valladolid_2022}
-# Step 1. define the path ####
-path <- "/Users/fdzul/Library/CloudStorage/OneDrive-Personal/datasets/CENAPRECE/2022/31_yucatan/"
-
-# Step 2. load the function ####
-source("~/Library/CloudStorage/Dropbox/r_developments/r_new_functions/3.Functions/boldenr/control_probables_graph.R")
-
-# Step 3. run the function ####
-control_probables_graph(path = path,
-                        cve_edo = "31",
-                        js = "Valladolid")
-```
-:::
-
-::: g-col-6
-[**2023**]{style="color:#660033;font-size:100%"}
 
 ```{r cp_valladolid_2023}
 # Step 1. define the path ####
@@ -538,10 +492,7 @@ control_probables_graph(path = path,
                         cve_edo = "31",
                         js = "Valladolid")
 ```
-:::
-:::
-</body>
-</html>
+
 
 
 ## [Dios Botic]{style="color:#003300;"}
