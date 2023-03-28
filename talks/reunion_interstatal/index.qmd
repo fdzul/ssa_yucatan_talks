@@ -224,9 +224,6 @@ heatmap_confirmados(dataset = x,
 ## <span style="color:#003300;">Transmisión Activa</span>
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
-::: {.panel-tabset}
-### Distribucion de Casos de Dengue
-
 ```{r distribucion_dengue}
 if(as.vector(Sys.info()["sysname"]) == "Darwin"){
     load("~/Library/CloudStorage/OneDrive-Personal/proyects/geocoding_mex/2023/9.geocoded_dataset/dengue_mx_2023.RData")
@@ -289,14 +286,12 @@ mapview::mapview(probables,
                      color = "white",
                      layer.name = "DENV-4")
 ```
-:::
+
 
 
 ## <span style="color:#003300;">Transmisión Activa</span>
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
-::: {.panel-tabset}
-### Cadenas de Transmisión-Confirmados
 ```{r cadenas_transmision_confirmado}
 library(magrittr)
 if(as.vector(Sys.info()["sysname"]) == "Darwin"){
@@ -314,7 +309,7 @@ denhotspots::transmission_chains_map(geocoded_dataset = z,
                                      locality = NULL,
                                      dengue_cases = "Confirmado")
 ```
-:::
+
 
 
 
@@ -335,11 +330,116 @@ ovitraps_occupancy_abundancy(ovitraps_path = path_vect,
 
 ::: {.panel-tabset}
 
-### Merida
+### Mérida
 
 ### Valladolid
 
 :::
+
+## <span style="color:#003300;">Accciones de Control</span>
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+<html>
+<head>
+
+```{=html}
+<style>
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  gap: 0px;
+  padding: 0px;
+}
+
+.grid-container > div {
+  text-align: center;
+  padding: 0px 0;
+  font-size: 50px;
+}
+
+.item1 {
+  grid-row-start: 1;
+  grid-row-end: 4;
+}
+</style>
+```
+</head>
+
+<body>
+
+<h1>Mérida</h1>
+
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+::: grid-container
+::: grid-item
+#### [**Acumulado**]{style="color:#660033;font-size:100%"}
+
+```{r cl_map_merida_barrido_cum, warning=FALSE, message=FALSE}
+htmltools::tags$iframe(src = "/Users/fdzul/Library/CloudStorage/Dropbox/r_developments/r_new_functions/cl_map_merida_barr_cum.html",
+                       width = "100%", 
+                       height = "700vh")
+```
+:::
+
+::: grid-item
+#### [**Últimos Dos Meses**]{style="color:#660033;font-size:100%"}
+
+```{r cl_map_merida_barrido_two_month, warning=FALSE, message=FALSE}
+htmltools::tags$iframe(src = "/Users/fdzul/Library/CloudStorage/Dropbox/r_developments/r_new_functions/cl_map_merida_barr_two_month.html",
+                       width = "100%", 
+                       height = "700vh")
+```
+:::
+
+::: grid-item
+#### [**Último Més**]{style="color:#660033;font-size:100%"}
+
+```{r cl_map_merida_barrido_month, warning=FALSE, message=FALSE}
+htmltools::tags$iframe(src = "/Users/fdzul/Library/CloudStorage/Dropbox/r_developments/r_new_functions/cl_map_merida_barr_month.html",
+                       width = "100%", 
+                       height = "700vh")
+```
+:::
+
+::: grid-item
+#### [**Últimas dos Semanas**]{style="color:#660033;font-size:100%"}
+:::
+
+::: grid-item
+```{r cl_map_merida_foc_cum, warning=FALSE, message=FALSE}
+htmltools::tags$iframe(src = "/Users/fdzul/Library/CloudStorage/Dropbox/r_developments/r_new_functions/cl_map_merida_foc_cum.html",
+                       width = "100%", 
+                       height = "700vh")
+```
+:::
+
+::: grid-item
+```{r cl_map_merida_foc_two_month, warning=FALSE, message=FALSE}
+htmltools::tags$iframe(src = "/Users/fdzul/Library/CloudStorage/Dropbox/r_developments/r_new_functions/cl_map_merida_foc_two_month.html",
+                       width = "100%", 
+                       height = "700vh")
+```
+:::
+
+::: grid-item
+```{r cl_map_merida_foc_month, warning=FALSE, message=FALSE}
+htmltools::tags$iframe(src = "/Users/fdzul/Library/CloudStorage/Dropbox/r_developments/r_new_functions/cl_map_merida_foc_month.html",
+                       width = "100%", 
+                       height = "700vh")
+```
+:::
+
+::: grid-item
+:::
+:::
+
+<p>Las acciones de prevención y control son actualizados los miercoles</p>
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+</body>
+
+</html>
 
 
 ## <span style="color:#003300;">Dios Botic</span>
