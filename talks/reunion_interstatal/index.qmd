@@ -452,17 +452,11 @@ cl_yuc <- joint_cl_blocks(path_vector = path_control_yuc,
 # Step 3. load the larvae_control_map function ####
 source("~/Library/CloudStorage/Dropbox/r_developments/r_new_functions/3.Functions/boldenr/cl_mapview.R")
 # Step 4. test the larvae_control_map function with yucatan ####
-a <- cl_mapview(cl_dataset = cl_yuc,
-           cve_edo = "31",
-           locality = c("Valladolid"),
-           time = "cumulative",
-           cl_type = "Barrido")
-b <- cl_mapview(cl_dataset = cl_yuc,
+cl_mapview(cl_dataset = cl_yuc,
            cve_edo = "31",
            locality = c("Valladolid"),
            time = "cumulative",
            cl_type = "Focalizado")
-leafsync::sync(a, b)
 ```
 
 ## [Dios Botic]{style="color:#003300;"}
