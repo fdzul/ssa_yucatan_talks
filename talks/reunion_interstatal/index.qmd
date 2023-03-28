@@ -11,19 +11,29 @@ highlight-style: a11y
 
 <h2>Plan Interestatal de Prevención y Control del Dengue<br>en Yucatán</h2>
 
-<h2> </h2>
+<h2>
+
+</h2>
 
 <hr>
 
-<h3> Felipe Dzul Manzanilla </h3><h3>Jorge Palacios</h3> <h3></h3>
+<h3>Felipe Dzul Manzanilla</h3>
 
-<h4> 2023-04-05 </h4>
+<h3>Jorge Palacios</h3>
+
+<h3>
+
+</h3>
+
+<h4>2023-04-05</h4>
+
 <br>
 
-<h4> `r fontawesome::fa("github", "black")` &nbsp; [github.com/fdzul](https://fdzul.github.io/web_site_fadm/)
+<h4>
 
+`r fontawesome::fa("github", "black")`   [github.com/fdzul](https://fdzul.github.io/web_site_fadm/)
 
-![](chains_merida.jpg){.absolute top=155 left="550" width="750"}
+![](chains_merida.jpg){.absolute top="155" left="550" width="750"}
 
 ```{r setup}
 path_arbo <- "/Users/fdzul/Library/CloudStorage/OneDrive-Personal/datasets/DGE/arbo/"
@@ -34,7 +44,9 @@ source("~/Dropbox/r_developments/r_new_functions/3.Functions/static_bump_map.R")
 library(sf)
 ```
 
-## <span style="color:#003300;">Panorama Epidemiológico</span>
+
+## [Panorama Epidemiológico]{style="color:#003300;"}
+
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
 ```{r}
@@ -150,22 +162,21 @@ ggplot2::ggplot(data = zyw,
     ggplot2::scale_color_manual(values = col)
 ```
 
+## [Panorama Epidemiológico]{style="color:#003300;"}
 
-## <span style="color:#003300;">Panorama Epidemiológico</span>
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
-:::{.column}
-
-![](wavelet_analysis.png){.absolute top=100 width="800" height="550" right=120}
-
+::: column
+![](wavelet_analysis.png){.absolute top="100" width="800" height="550" right="120"}
 :::
 
-## <span style="color:#003300;">Panorama Epidemiológico</span>
+## [Panorama Epidemiológico]{style="color:#003300;"}
+
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
-::: {.panel-tabset}
-
+::: panel-tabset
 ### 2022
+
 ```{r bump_map_mun_2022}
 library(sf)
 static_bump_map(dataset = x,
@@ -200,13 +211,13 @@ static_bump_map(dataset = x,
                 pal_vir = "viridis") +
     ggplot2::coord_sf(xlim = c(-90.5, -86))
 ```
-
 :::
 
-## <span style="color:#003300;">Panorama Epidemiológico</span>
+## [Panorama Epidemiológico]{style="color:#003300;"}
+
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
-&nbsp;
+ 
 
 ```{r casos_semana_mpo}
 source("~/Library/CloudStorage/Dropbox/r_developments/r_new_functions/3.Functions/heatmap_confirmados.R")
@@ -220,8 +231,8 @@ heatmap_confirmados(dataset = x,
                     EDO = FALSE)
 ```
 
+## [Transmisión Activa]{style="color:#003300;"}
 
-## <span style="color:#003300;">Transmisión Activa</span>
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
 ```{r distribucion_dengue}
@@ -287,9 +298,8 @@ mapview::mapview(probables,
                      layer.name = "DENV-4")
 ```
 
+## [Transmisión Activa]{style="color:#003300;"}
 
-
-## <span style="color:#003300;">Transmisión Activa</span>
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
 ```{r cadenas_transmision_confirmado}
@@ -310,10 +320,8 @@ denhotspots::transmission_chains_map(geocoded_dataset = z,
                                      dengue_cases = "Confirmado")
 ```
 
+## [Vigilancia Entomológica]{style="color:#003300;"}
 
-
-
-## <span style="color:#003300;">Vigilancia Entomológica</span>
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
 ```{r indicador_ovitrampas_by_ovitrap,fig.show = "hold",fig.align = "center"}
@@ -325,131 +333,102 @@ ovitraps_occupancy_abundancy(ovitraps_path = path_vect,
 
 ```
 
-## <span style="color:#003300;">Vigilancia Entomológica</span>
+## [Vigilancia Entomológica]{style="color:#003300;"}
+
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
-::: {.panel-tabset}
-
+::: panel-tabset
 ### Mérida
+```{r vector_hotspots_merida}
+# step 1. define the path for the historic dataset ####
+path_vect <- "/Users/fdzul/Library/CloudStorage/OneDrive-Personal/datasets/CENAPRECE/2023/31_yucatan"
+path_coord <- paste(path_vect, "DescargaOvitrampasMesFco.txt", sep = "/")
 
+
+library(sf)
+# Step 2. run the spde model ####
+merida_2023 <- deneggs::eggs_hotspots_week(cve_mpo = "050",
+                                           cve_edo = "31",
+                                           year = "2023",
+                                           hist_dataset = FALSE,
+                                           locality = "Mérida",
+                                           path_vect = path_vect,
+                                           path_coord = path_coord,
+                                           integration_strategy = "eb",
+                                           aproximation_method = "gaussian",
+                                           fam_distribution = "zeroinflatednbinomial1",
+                                           kvalue = 40,
+                                           plot = FALSE,
+                                           palette.viridis = "viridis",
+                                           cell.size = 500,
+                                           alpha.value = .99)
+
+# Step 3. Visualize the hotspots intensity #### 
+deneggs::eggs_hotspots_intensity_map(spde_betas = merida_2023$betas,
+                                     years = 2023,
+                                     locality = "Mérida",
+                                     cve_ent = "31",
+                                     palette = rcartocolor::carto_pal,
+                                     name = "SunsetDark")
+```
 ### Valladolid
+```{r vector_hotspots_valladolid}
+# step 1. define the path for the historic dataset ####
+path_vect <- "/Users/fdzul/Library/CloudStorage/OneDrive-Personal/datasets/CENAPRECE/2023/31_yucatan"
+path_coord <- paste(path_vect, "DescargaOvitrampasMesFco.txt", sep = "/")
+
+
+library(sf)
+# Step 2. run the spde model ####
+x <- deneggs::eggs_hotspots_week(cve_mpo = "102",
+                                           cve_edo = "31",
+                                           year = "2023",
+                                           hist_dataset = FALSE,
+                                           locality = "Valladolid",
+                                           path_vect = path_vect,
+                                           path_coord = path_coord,
+                                           integration_strategy = "eb",
+                                           aproximation_method = "gaussian",
+                                           fam_distribution = "zeroinflatednbinomial1",
+                                           kvalue = 40,
+                                           plot = FALSE,
+                                           palette.viridis = "viridis",
+                                           cell.size = 500,
+                                           alpha.value = .99)
+
+# Step 3. Visualize the hotspots intensity #### 
+deneggs::eggs_hotspots_intensity_map(spde_betas = x$betas,
+                                     years = 2023,
+                                     locality = "Valladolid",
+                                     cve_ent = "31",
+                                     palette = rcartocolor::carto_pal,
+                                     name = "SunsetDark")
+```
 
 :::
 
-## <span style="color:#003300;">Accciones de Control</span>
+## [Accciones de Control]{style="color:#003300;"}
+
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
-<html>
-<head>
 
-```{=html}
-<style>
-.grid-container {
-  display: grid;
-  grid-template-columns: auto auto auto auto;
-  gap: 0px;
-  padding: 0px;
-}
 
-.grid-container > div {
-  text-align: center;
-  padding: 0px 0;
-  font-size: 50px;
-}
 
-.item1 {
-  grid-row-start: 1;
-  grid-row-end: 4;
-}
-</style>
-```
-</head>
 
-<body>
 
-<h1>Mérida</h1>
+
+
+
+## [Dios Botic]{style="color:#003300;"}
 
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
-::: grid-container
-::: grid-item
-#### [**Acumulado**]{style="color:#660033;font-size:100%"}
-
-```{r cl_map_merida_barrido_cum, warning=FALSE, message=FALSE}
-htmltools::tags$iframe(src = "/Users/fdzul/Library/CloudStorage/Dropbox/r_developments/r_new_functions/cl_map_merida_barr_cum.html",
-                       width = "100%", 
-                       height = "700vh")
-```
-:::
-
-::: grid-item
-#### [**Últimos Dos Meses**]{style="color:#660033;font-size:100%"}
-
-```{r cl_map_merida_barrido_two_month, warning=FALSE, message=FALSE}
-htmltools::tags$iframe(src = "/Users/fdzul/Library/CloudStorage/Dropbox/r_developments/r_new_functions/cl_map_merida_barr_two_month.html",
-                       width = "100%", 
-                       height = "700vh")
-```
-:::
-
-::: grid-item
-#### [**Último Més**]{style="color:#660033;font-size:100%"}
-
-```{r cl_map_merida_barrido_month, warning=FALSE, message=FALSE}
-htmltools::tags$iframe(src = "/Users/fdzul/Library/CloudStorage/Dropbox/r_developments/r_new_functions/cl_map_merida_barr_month.html",
-                       width = "100%", 
-                       height = "700vh")
-```
-:::
-
-::: grid-item
-#### [**Últimas dos Semanas**]{style="color:#660033;font-size:100%"}
-:::
-
-::: grid-item
-```{r cl_map_merida_foc_cum, warning=FALSE, message=FALSE}
-htmltools::tags$iframe(src = "/Users/fdzul/Library/CloudStorage/Dropbox/r_developments/r_new_functions/cl_map_merida_foc_cum.html",
-                       width = "100%", 
-                       height = "700vh")
-```
-:::
-
-::: grid-item
-```{r cl_map_merida_foc_two_month, warning=FALSE, message=FALSE}
-htmltools::tags$iframe(src = "/Users/fdzul/Library/CloudStorage/Dropbox/r_developments/r_new_functions/cl_map_merida_foc_two_month.html",
-                       width = "100%", 
-                       height = "700vh")
-```
-:::
-
-::: grid-item
-```{r cl_map_merida_foc_month, warning=FALSE, message=FALSE}
-htmltools::tags$iframe(src = "/Users/fdzul/Library/CloudStorage/Dropbox/r_developments/r_new_functions/cl_map_merida_foc_month.html",
-                       width = "100%", 
-                       height = "700vh")
-```
-:::
-
-::: grid-item
-:::
-:::
-
-<p>Las acciones de prevención y control son actualizados los miercoles</p>
-<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
-
-</body>
-
-</html>
 
 
-## <span style="color:#003300;">Dios Botic</span>
-<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
-&nbsp;
+-   ***Bio*** : https://fdzul.github.io/web_site_fadm/
 
-- ***Bio*** : https://fdzul.github.io/web_site_fadm/
+-   ***email*** : [felipe.dzul.m\@gmail.com]()
 
-- ***email***       :     [felipe.dzul.m@gmail.com]()
+-   ***celular*** : [8139945623]()
 
-- ***celular***     :     [8139945623]()
-
-- ***slides***:     https://joyful-palmier-ec5e33.netlify.app/talks/reunion_interstatal/#/
+-   ***slides***: https://joyful-palmier-ec5e33.netlify.app/talks/reunion_interstatal/#/
