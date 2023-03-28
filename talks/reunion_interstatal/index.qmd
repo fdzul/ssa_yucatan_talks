@@ -31,7 +31,7 @@ highlight-style: a11y
 
 <h4>
 
-`r fontawesome::fa("github", "black")`   [github.com/fdzul](https://fdzul.github.io/web_site_fadm/)
+`r fontawesome::fa("github", "black")`  [github.com/fdzul](https://fdzul.github.io/web_site_fadm/)
 
 ![](chains_merida.jpg){.absolute top="155" left="550" width="750"}
 
@@ -215,8 +215,6 @@ static_bump_map(dataset = x,
 ## [Panorama Epidemiológico]{style="color:#003300;"}
 
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
-
- 
 
 ```{r casos_semana_mpo}
 source("~/Library/CloudStorage/Dropbox/r_developments/r_new_functions/3.Functions/heatmap_confirmados.R")
@@ -467,7 +465,7 @@ cl_mapview(cl_dataset = cl_yuc,
 
 ::: grid
 ::: g-col-6
-### [**2022**]{style="color:#660033;font-size:100%"}
+[**2022**]{style="color:#660033;font-size:100%"}
 ```{r cp_merida_2022}
 # Step 1. define the path ####
 path <- "/Users/fdzul/Library/CloudStorage/OneDrive-Personal/datasets/CENAPRECE/2022/31_yucatan/"
@@ -483,7 +481,7 @@ control_probables_graph(path = path,
 :::
 
 ::: g-col-6
-### [**2023**]{style="color:#660033;font-size:100%"}
+[**2023**]{style="color:#660033;font-size:100%"}
 ```{r cp_merida_2023}
 # Step 1. define the path ####
 path <- "/Users/fdzul/Library/CloudStorage/OneDrive-Personal/datasets/CENAPRECE/2023/31_yucatan/"
@@ -503,9 +501,14 @@ control_probables_graph(path = path,
 ## [Control de Probables (Valladolid)]{style="color:#003300;"}
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
+<html>
+<head>
+</head>
+<body>
+
 ::: grid
 ::: g-col-6
-#### [**2022**]{style="color:#660033;font-size:100%"}
+[**2022**]{style="color:#660033;font-size:100%"}
 ```{r cp_valladolid_2022}
 # Step 1. define the path ####
 path <- "/Users/fdzul/Library/CloudStorage/OneDrive-Personal/datasets/CENAPRECE/2022/31_yucatan/"
@@ -521,7 +524,7 @@ control_probables_graph(path = path,
 :::
 
 ::: g-col-6
-#### [**2023**]{style="color:#660033;font-size:100%"}
+[**2023**]{style="color:#660033;font-size:100%"}
 
 ```{r cp_valladolid_2023}
 # Step 1. define the path ####
@@ -537,12 +540,11 @@ control_probables_graph(path = path,
 ```
 :::
 :::
-
-
+</body>
+</html>
 
 
 ## [Dios Botic]{style="color:#003300;"}
-
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
 -   ***Bio*** : https://fdzul.github.io/web_site_fadm/
