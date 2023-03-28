@@ -221,10 +221,107 @@ heatmap_confirmados(dataset = x,
 ```
 
 
+## <span style="color:#003300;">Transmisión Activa</span>
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+::: {.panel-tabset}
+### Distribucion de Casos de Dengue
+
+```{r distribucion_dengue}
+if(as.vector(Sys.info()["sysname"]) == "Darwin"){
+    load("~/Library/CloudStorage/OneDrive-Personal/proyects/geocoding_mex/2023/9.geocoded_dataset/dengue_mx_2023.RData")
+    
+} else if(as.vector(Sys.info()["sysname"]) == "Windows"){
+    load("D:/OneDrive/proyects/geocoding_mex/2023/9.geocoded_dataset/dengue_mx_2023.RData")
+
+} else if(as.vector(Sys.info()["sysname"]) == "Linux"){
+    
+}
+
+z <- z |>
+    sf::st_as_sf(coords = c("long", "lat"),
+                 crs = 4326) |>
+    dplyr::mutate(ESTATUS_CASO = ifelse(ESTATUS_CASO == 1,
+                                   "Probable",
+                                   "Confirmado"))
+
+confirmados <- z |>
+    dplyr::filter(ESTATUS_CASO == "Confirmado")
+probables <- z |>
+    dplyr::filter(ESTATUS_CASO == "Probable")
+
+serotype_1 <- z |>
+    dplyr::filter(ESTATUS_CASO == "Confirmado") |>
+    dplyr::filter(DENGUE_SER_TRIPLEX == 1)
+serotype_2 <- z |>
+    dplyr::filter(ESTATUS_CASO == "Confirmado") |>
+    dplyr::filter(DENGUE_SER_TRIPLEX == 2)
+serotype_3 <- z |>
+    dplyr::filter(ESTATUS_CASO == "Confirmado") |>
+    dplyr::filter(DENGUE_SER_TRIPLEX == 3)
+serotype_4 <- z |>
+    dplyr::filter(ESTATUS_CASO == "Confirmado") |>
+    dplyr::filter(DENGUE_SER_TRIPLEX == 4)
+
+##############
+mapview::mapview(probables,
+                 col.regions = "#898F9C",
+                 color = "white",
+                 layer.name = "Probables") +
+    mapview::mapview(confirmados,
+                     col.regions = "#4267B2",
+                     color = "white",
+                     layer.name = "Positivos") +
+    mapview::mapview(serotype_1,
+                     col.regions = "#36C5F0",
+                     color = "white",
+                     layer.name = "DENV-1") +
+    mapview::mapview(serotype_2,
+                     col.regions = "#2EB67D",
+                     color = "white",
+                     layer.name = "DENV-2") +
+    mapview::mapview(serotype_3,
+                     col.regions = "#E01E5A",
+                     color = "white",
+                     layer.name = "DENV-3") +
+    mapview::mapview(serotype_4,
+                     col.regions = "#FC642D",#"#ECB22E",
+                     color = "white",
+                     layer.name = "DENV-4")
+```
+:::
+
+
+## <span style="color:#003300;">Transmisión Activa</span>
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+::: {.panel-tabset}
+### Cadenas de Transmisión-Confirmados
+```{r cadenas_transmision_confirmado}
+library(magrittr)
+if(as.vector(Sys.info()["sysname"]) == "Darwin"){
+    load("~/Library/CloudStorage/OneDrive-Personal/proyects/geocoding_mex/2023/9.geocoded_dataset/dengue_mx_2023.RData")
+    
+} else if(as.vector(Sys.info()["sysname"]) == "Windows"){
+    load("D:/OneDrive/proyects/geocoding_mex/2023/9.geocoded_dataset/dengue_mx_2023.RData")
+
+} else if(as.vector(Sys.info()["sysname"]) == "Linux"){
+    
+}
+
+denhotspots::transmission_chains_map(geocoded_dataset = z,
+                                     cve_edo = "31",
+                                     locality = NULL,
+                                     dengue_cases = "Confirmado")
+```
+:::
+
+
+
 ## <span style="color:#003300;">Vigilancia Entomológica</span>
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
-```{r indicador_ovitrampas_by_ovitrap,fig.align = "center"}
+```{r indicador_ovitrampas_by_ovitrap,fig.show = "hold",fig.align = "center"}
 source("~/Dropbox/r_developments/r_new_functions/3.Functions/ovitraps_occupancy_abundancy.R")
 
 path_vect <- "/Users/fdzul/Library/CloudStorage/OneDrive-Personal/datasets/CENAPRECE/2023/31_yucatan"
@@ -233,7 +330,16 @@ ovitraps_occupancy_abundancy(ovitraps_path = path_vect,
 
 ```
 
+## <span style="color:#003300;">Vigilancia Entomológica</span>
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
+::: {.panel-tabset}
+
+### Merida
+
+### Valladolid
+
+:::
 
 
 ## <span style="color:#003300;">Dios Botic</span>
