@@ -160,8 +160,6 @@ ggplot2::ggplot(data = zyw,
 
 :::
 
-
-##
 ## <span style="color:#003300;">Panorama Epidemiológico</span>
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
@@ -204,6 +202,23 @@ static_bump_map(dataset = x,
 ```
 
 :::
+
+## <span style="color:#003300;">Panorama Epidemiológico</span>
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+&nbsp;
+
+```{r casos_semana_mpo}
+source("~/Library/CloudStorage/Dropbox/r_developments/r_new_functions/3.Functions/heatmap_confirmados.R")
+library(ggplot2)
+heatmap_confirmados(dataset = x, 
+                    year = 2023, 
+                    size_text = 3,
+                    state = "YUCATAN",
+                    JS = FALSE,
+                    MPO = TRUE,
+                    EDO = FALSE)
+```
 
 
 
