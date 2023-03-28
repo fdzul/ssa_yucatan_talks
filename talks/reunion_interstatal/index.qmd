@@ -407,7 +407,7 @@ deneggs::eggs_hotspots_intensity_map(spde_betas = x$betas,
 
 :::
 
-## [Accciones de Control]{style="color:#003300;"}
+## [Accciones de Control (Mérida)]{style="color:#003300;"}
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
 ```{r cl_merida}
@@ -436,7 +436,7 @@ b <- cl_mapview(cl_dataset = cl_yuc,
 leafsync::sync(a, b)
 ```
 
-## [Accciones de Control]{style="color:#003300;"}
+## [Accciones de Control (Valladolid)]{style="color:#003300;"}
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
 ```{r cl_valladolid}
@@ -461,7 +461,6 @@ cl_mapview(cl_dataset = cl_yuc,
 
 ## [Dios Botic]{style="color:#003300;"}
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
-
 
 
 -   ***Bio*** : https://fdzul.github.io/web_site_fadm/
