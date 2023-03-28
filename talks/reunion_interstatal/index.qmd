@@ -160,13 +160,14 @@ ggplot2::ggplot(data = zyw,
 
 :::
 
+
+##
 ## <span style="color:#003300;">Panorama Epidemiológico</span>
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
-&nbsp;
 
-:::{.column}
+::: {.panel-tabset}
 
- 2022
+### 2022
 ```{r bump_map_mun_2022}
 library(sf)
 static_bump_map(dataset = x,
@@ -184,9 +185,8 @@ static_bump_map(dataset = x,
     ggplot2::coord_sf(xlim = c(-90.5, -86))
 ```
 
- 
- 
- 2023
+### 2023
+
 ```{r bump_map_mun_2023}
 static_bump_map(dataset = x,
                 year = "2023",
@@ -203,14 +203,7 @@ static_bump_map(dataset = x,
     ggplot2::coord_sf(xlim = c(-90.5, -86))
 ```
 
-
 :::
-
-
-## <span style="color:#003300;">Panorama Epidemiológico</span>
-<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
-
-
 
 
 
