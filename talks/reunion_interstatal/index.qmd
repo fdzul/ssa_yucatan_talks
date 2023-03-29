@@ -31,7 +31,7 @@ highlight-style: a11y
 
 <h4>
 
-`r fontawesome::fa("github", "black")`  [github.com/fdzul](https://fdzul.github.io/web_site_fadm/)
+`r fontawesome::fa("github", "black")` [github.com/fdzul](https://fdzul.github.io/web_site_fadm/)
 
 ![](chains_merida.jpg){.absolute top="155" left="550" width="750"}
 
@@ -45,12 +45,13 @@ library(sf)
 ```
 
 ## [Manejo Integrado de Aedes]{style="color:#003300"}
+
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
-![](https://journals.plos.org/plosntds/article/figure/image?size=large&amp;id=10.1371/journal.pntd.0006845.g001){.absolute top="100" width="800" height="550" right="120"}
-
+![](https://journals.plos.org/plosntds/article/figure/image?size=large&id=10.1371/journal.pntd.0006845.g001){.absolute top="100" width="800" height="550" right="120"}
 
 ## [Operacionalización del MIA]{style="color:#003300"}
+
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
@@ -179,10 +180,9 @@ ggplot2::ggplot() +
 
 ```
 
-
 ## [Operacionalización del MIA]{style="color:#003300"}
-<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
 ```{r mia_mexico, echo=FALSE, warning=FALSE, message=FALSE}
 # Step 1. load the dataset #####
@@ -310,16 +310,17 @@ ggplot2::ggplot() +
 
 ```
 
-
 ## [Transmisión Persistente]{style="color:#003300"}
+
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
 <html>
 <head>
+```{=html}
 <style>
 .grid-container {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto auto auto;
   padding: 5px;
 }
 
@@ -331,404 +332,147 @@ ggplot2::ggplot() +
   text-align: center;
 }
 </style>
+```
 </head>
 <body>
+<h1>
+</h1>
+<p>
+</p>
 
-<h1></h1>
+::: grid-container
 
-<p></p>
+::: grid-item
+Localidad
+:::
 
-<div class="grid-container">
-  <div class="grid-item">Hotspots de la Transmisión</div>
-  <div class="grid-item">Hotspots de huevos del Vector</div>
-  <div class="grid-item">Escenarios operativos</div>
-  <div class="grid-item">
-```{r mia_mexico1, echo=FALSE, warning=FALSE, message=FALSE}
-# Step 1. load the dataset #####
-load("/Users/fdzul/Library/CloudStorage/OneDrive-Personal/automatic_read_sinave/8.RData/epid_channel_data.RData")
+::: grid-item
+Transmisión
+:::
 
-# Step 2. extract the dengue cases of veracruz ####
-x <- x |>
-    dplyr::filter(DES_EDO_RES == "VERACRUZ") 
+::: grid-item
+Vector
+:::
 
-y <- tibble::tibble(SEM = x$SEM,
-                    y = x$q25,
-                    arm = "Nuevo Paradigma")
-prob <- tibble::tibble(SEM = x$SEM,
-                       prob = rep(0, length(x$SEM)))
+::: grid-item
+Escenarios
+:::
 
-# plot risk stratificaction  #####
-ggplot2::ggplot() +
-    ggplot2::geom_rect(ggplot2::aes(xmin = c(-Inf, 25), 
-                                    xmax = c(25, Inf), 
-                                    ymin = -Inf, 
-                                    ymax = Inf),
-                       fill = c("#2EB67D", "#E01E5A"),
-                       alpha = .2) +
-    ggplot2::geom_rect(ggplot2::aes(xmin = 20, 
-                                    xmax = 25, 
-                                    ymin = -Inf, 
-                                    ymax = Inf),
-                       fill = "#ECB22E",
-                       alpha = 0.8) +
-    ggplot2::geom_rect(ggplot2::aes(xmin = 38, 
-                                    xmax = 40, 
-                                    ymin = -Inf, 
-                                    ymax = Inf),
-                       fill = "#36C5F0",
-                       alpha = 0.8) +
-    ggplot2::geom_vline(xintercept = 25,
-                        color = "gray", #"#36C5F0",
-                        size = 1,
-                        linetype = 3) +
-    ggplot2::geom_vline(xintercept = 20,
-                        color = "gray", #"#36C5F0",
-                        size = 1,
-                        linetype = 3) +
-    ggplot2::geom_line(data = x, 
-                       ggplot2::aes(x = SEM,
-                                    y = q75-10),
-                       col = "#E01E5A",
-                       size = 3) +
-    ggplot2::geom_line(data = y, 
-                       ggplot2::aes(x = SEM,
-                                    y = y),
-                       color = "#2EB67D", #"#36C5F0",
-                       size = 3) +
-    ggplot2::ylab("Número de Casos") +
-    ggplot2::xlab("Semanas Epidemiológicas") +
-    ggplot2::annotate("text",
-                      label = "Control Proactivo",
-                      x = 10, 
-                      y = 450,
-                      #text = "risk",
-                      col = "#2EB67D",
-                      size = 6) +
-    ggplot2::annotate("text",
-                      label = "Escenarios Operativos \nbasados \nen \nTransmisión Persistente",
-                      x = 10, 
-                      y = 380,
-                      #text = "risk",
-                      col = "#2EB67D",
-                      size = 4) +
-    ggplot2::annotate("text",
-                      label = "Control Reactivo",
-                      x = 42, 
-                      y = 450,
-                      #text = "risk",
-                      col = "#E01E5A",
-                      size = 6) +
-    ggplot2::annotate("text",
-                      label = "Escenarios Operativos \nbasados \nen \nTransmisión Activa",
-                      x = 45, 
-                      y = 380,
-                      #text = "risk",
-                      col = "#E01E5A",
-                      size = 4) +
-    ggplot2::geom_line(data = prob, 
-                       ggplot2::aes(x = SEM,
-                                    y = prob),
-                       color = "#36C5F0",
-                       size = 2)  +
-    ggplot2::annotate("text",
-                      label = "Acciones Específica Básicas",
-                      x = 10, 
-                      y = 280,
-                      col = "gray",
-                      size = 4) +
-    ggplot2::annotate("text",
-                      label = "Control de Probables",
-                      x = 10, 
-                      y = 250,
-                      col = "#36C5F0",
-                      size = 4) +
-    ggplot2::annotate("text",
-                      label = "Rociado Residual",
-                      x = 10, 
-                      y = 220,
-                      col = "#ECB22E",
-                      size = 4) +
-    ggplot2::annotate("text",
-                      label = "Control Larvario",
-                      x = 10, 
-                      y = 200,
-                      col = "#ECB22E",
-                      size = 4) +
-    ggplot2::annotate("text",
-                      label = "Acciones Específicas de Soporte",
-                      x = 10, 
-                      y = 150,
-                      col = "gray",
-                      size = 4) +
-    ggplot2::annotate("text",
-                      label = "Termonebulización,\n Nebulización, & \nEliminación Masiva de Criaderos",
-                      x = 10, 
-                      y = 110,
-                      col = "gray",
-                      size = 3)
+::: grid-item
+Mérida
+:::
 
+::: grid-item
+```{r}
+load("~/Library/CloudStorage/Dropbox/hotspots_2022/8.RData/cases_hotspots_agebs19.RData")
+library(magrittr)
+cases_hotspots_agebs19 |>
+    sf::st_make_valid() |>
+    dplyr::filter(loc == "Merida") |>
+denhotspots::staticmap_intensity(pal = rcartocolor::carto_pal,
+                                 pal_name = TRUE,
+                                 name = "OrYel",
+                                 breaks = 1,
+                                 dir_pal = -1,
+                                 x_leg = 0.5,
+                                 y_leg = 0.1,
+                                 ageb = TRUE)
 ```
-  </div>
-  <div class="grid-item">
-```{r mia_mexico2, echo=FALSE, warning=FALSE, message=FALSE}
-# Step 1. load the dataset #####
-load("/Users/fdzul/Library/CloudStorage/OneDrive-Personal/automatic_read_sinave/8.RData/epid_channel_data.RData")
 
-# Step 2. extract the dengue cases of veracruz ####
-x <- x |>
-    dplyr::filter(DES_EDO_RES == "VERACRUZ") 
+:::
 
-y <- tibble::tibble(SEM = x$SEM,
-                    y = x$q25,
-                    arm = "Nuevo Paradigma")
-prob <- tibble::tibble(SEM = x$SEM,
-                       prob = rep(0, length(x$SEM)))
-
-# plot risk stratificaction  #####
-ggplot2::ggplot() +
-    ggplot2::geom_rect(ggplot2::aes(xmin = c(-Inf, 25), 
-                                    xmax = c(25, Inf), 
-                                    ymin = -Inf, 
-                                    ymax = Inf),
-                       fill = c("#2EB67D", "#E01E5A"),
-                       alpha = .2) +
-    ggplot2::geom_rect(ggplot2::aes(xmin = 20, 
-                                    xmax = 25, 
-                                    ymin = -Inf, 
-                                    ymax = Inf),
-                       fill = "#ECB22E",
-                       alpha = 0.8) +
-    ggplot2::geom_rect(ggplot2::aes(xmin = 38, 
-                                    xmax = 40, 
-                                    ymin = -Inf, 
-                                    ymax = Inf),
-                       fill = "#36C5F0",
-                       alpha = 0.8) +
-    ggplot2::geom_vline(xintercept = 25,
-                        color = "gray", #"#36C5F0",
-                        size = 1,
-                        linetype = 3) +
-    ggplot2::geom_vline(xintercept = 20,
-                        color = "gray", #"#36C5F0",
-                        size = 1,
-                        linetype = 3) +
-    ggplot2::geom_line(data = x, 
-                       ggplot2::aes(x = SEM,
-                                    y = q75-10),
-                       col = "#E01E5A",
-                       size = 3) +
-    ggplot2::geom_line(data = y, 
-                       ggplot2::aes(x = SEM,
-                                    y = y),
-                       color = "#2EB67D", #"#36C5F0",
-                       size = 3) +
-    ggplot2::ylab("Número de Casos") +
-    ggplot2::xlab("Semanas Epidemiológicas") +
-    ggplot2::annotate("text",
-                      label = "Control Proactivo",
-                      x = 10, 
-                      y = 450,
-                      #text = "risk",
-                      col = "#2EB67D",
-                      size = 6) +
-    ggplot2::annotate("text",
-                      label = "Escenarios Operativos \nbasados \nen \nTransmisión Persistente",
-                      x = 10, 
-                      y = 380,
-                      #text = "risk",
-                      col = "#2EB67D",
-                      size = 4) +
-    ggplot2::annotate("text",
-                      label = "Control Reactivo",
-                      x = 42, 
-                      y = 450,
-                      #text = "risk",
-                      col = "#E01E5A",
-                      size = 6) +
-    ggplot2::annotate("text",
-                      label = "Escenarios Operativos \nbasados \nen \nTransmisión Activa",
-                      x = 45, 
-                      y = 380,
-                      #text = "risk",
-                      col = "#E01E5A",
-                      size = 4) +
-    ggplot2::geom_line(data = prob, 
-                       ggplot2::aes(x = SEM,
-                                    y = prob),
-                       color = "#36C5F0",
-                       size = 2)  +
-    ggplot2::annotate("text",
-                      label = "Acciones Específica Básicas",
-                      x = 10, 
-                      y = 280,
-                      col = "gray",
-                      size = 4) +
-    ggplot2::annotate("text",
-                      label = "Control de Probables",
-                      x = 10, 
-                      y = 250,
-                      col = "#36C5F0",
-                      size = 4) +
-    ggplot2::annotate("text",
-                      label = "Rociado Residual",
-                      x = 10, 
-                      y = 220,
-                      col = "#ECB22E",
-                      size = 4) +
-    ggplot2::annotate("text",
-                      label = "Control Larvario",
-                      x = 10, 
-                      y = 200,
-                      col = "#ECB22E",
-                      size = 4) +
-    ggplot2::annotate("text",
-                      label = "Acciones Específicas de Soporte",
-                      x = 10, 
-                      y = 150,
-                      col = "gray",
-                      size = 4) +
-    ggplot2::annotate("text",
-                      label = "Termonebulización,\n Nebulización, & \nEliminación Masiva de Criaderos",
-                      x = 10, 
-                      y = 110,
-                      col = "gray",
-                      size = 3)
-
+::: grid-item
+```{r}
+load("~/Library/CloudStorage/OneDrive-Personal/proyects/hotspots_eggs/8.RData/31_yucatan/betas/31_yucatan_zinb1_betas.RData")
+source("~/Library/CloudStorage/Dropbox/r_developments/r_new_functions/3.Functions/eggs_hotspots_intensity_map_year.R")
+eggs_hotspots_intensity_map_year(betas = betas_31_yucatan,
+                                 locality = "Merida",
+                                 cve_ent = "31",
+                                 palette = rcartocolor::carto_pal,
+                                 name = "SunsetDark")
 ```
-  </div>
-  <div class="grid-item">
-```{r mia_mexico3, echo=FALSE, warning=FALSE, message=FALSE}
-# Step 1. load the dataset #####
-load("/Users/fdzul/Library/CloudStorage/OneDrive-Personal/automatic_read_sinave/8.RData/epid_channel_data.RData")
 
-# Step 2. extract the dengue cases of veracruz ####
-x <- x |>
-    dplyr::filter(DES_EDO_RES == "VERACRUZ") 
+:::
 
-y <- tibble::tibble(SEM = x$SEM,
-                    y = x$q25,
-                    arm = "Nuevo Paradigma")
-prob <- tibble::tibble(SEM = x$SEM,
-                       prob = rep(0, length(x$SEM)))
-
-# plot risk stratificaction  #####
-ggplot2::ggplot() +
-    ggplot2::geom_rect(ggplot2::aes(xmin = c(-Inf, 25), 
-                                    xmax = c(25, Inf), 
-                                    ymin = -Inf, 
-                                    ymax = Inf),
-                       fill = c("#2EB67D", "#E01E5A"),
-                       alpha = .2) +
-    ggplot2::geom_rect(ggplot2::aes(xmin = 20, 
-                                    xmax = 25, 
-                                    ymin = -Inf, 
-                                    ymax = Inf),
-                       fill = "#ECB22E",
-                       alpha = 0.8) +
-    ggplot2::geom_rect(ggplot2::aes(xmin = 38, 
-                                    xmax = 40, 
-                                    ymin = -Inf, 
-                                    ymax = Inf),
-                       fill = "#36C5F0",
-                       alpha = 0.8) +
-    ggplot2::geom_vline(xintercept = 25,
-                        color = "gray", #"#36C5F0",
-                        size = 1,
-                        linetype = 3) +
-    ggplot2::geom_vline(xintercept = 20,
-                        color = "gray", #"#36C5F0",
-                        size = 1,
-                        linetype = 3) +
-    ggplot2::geom_line(data = x, 
-                       ggplot2::aes(x = SEM,
-                                    y = q75-10),
-                       col = "#E01E5A",
-                       size = 3) +
-    ggplot2::geom_line(data = y, 
-                       ggplot2::aes(x = SEM,
-                                    y = y),
-                       color = "#2EB67D", #"#36C5F0",
-                       size = 3) +
-    ggplot2::ylab("Número de Casos") +
-    ggplot2::xlab("Semanas Epidemiológicas") +
-    ggplot2::annotate("text",
-                      label = "Control Proactivo",
-                      x = 10, 
-                      y = 450,
-                      #text = "risk",
-                      col = "#2EB67D",
-                      size = 6) +
-    ggplot2::annotate("text",
-                      label = "Escenarios Operativos \nbasados \nen \nTransmisión Persistente",
-                      x = 10, 
-                      y = 380,
-                      #text = "risk",
-                      col = "#2EB67D",
-                      size = 4) +
-    ggplot2::annotate("text",
-                      label = "Control Reactivo",
-                      x = 42, 
-                      y = 450,
-                      #text = "risk",
-                      col = "#E01E5A",
-                      size = 6) +
-    ggplot2::annotate("text",
-                      label = "Escenarios Operativos \nbasados \nen \nTransmisión Activa",
-                      x = 45, 
-                      y = 380,
-                      #text = "risk",
-                      col = "#E01E5A",
-                      size = 4) +
-    ggplot2::geom_line(data = prob, 
-                       ggplot2::aes(x = SEM,
-                                    y = prob),
-                       color = "#36C5F0",
-                       size = 2)  +
-    ggplot2::annotate("text",
-                      label = "Acciones Específica Básicas",
-                      x = 10, 
-                      y = 280,
-                      col = "gray",
-                      size = 4) +
-    ggplot2::annotate("text",
-                      label = "Control de Probables",
-                      x = 10, 
-                      y = 250,
-                      col = "#36C5F0",
-                      size = 4) +
-    ggplot2::annotate("text",
-                      label = "Rociado Residual",
-                      x = 10, 
-                      y = 220,
-                      col = "#ECB22E",
-                      size = 4) +
-    ggplot2::annotate("text",
-                      label = "Control Larvario",
-                      x = 10, 
-                      y = 200,
-                      col = "#ECB22E",
-                      size = 4) +
-    ggplot2::annotate("text",
-                      label = "Acciones Específicas de Soporte",
-                      x = 10, 
-                      y = 150,
-                      col = "gray",
-                      size = 4) +
-    ggplot2::annotate("text",
-                      label = "Termonebulización,\n Nebulización, & \nEliminación Masiva de Criaderos",
-                      x = 10, 
-                      y = 110,
-                      col = "gray",
-                      size = 3)
-
+::: grid-item
+```{r}
+load("~/Library/CloudStorage/Dropbox/hotspots_2022/8.RData/cases_hotspots_agebs19.RData")
+library(magrittr)
+cases_hotspots_agebs19 |>
+    sf::st_make_valid() |>
+    dplyr::filter(loc == "Merida") |>
+denhotspots::staticmap_intensity(pal = rcartocolor::carto_pal,
+                                 pal_name = TRUE,
+                                 name = "OrYel",
+                                 breaks = 1,
+                                 dir_pal = -1,
+                                 x_leg = 0.5,
+                                 y_leg = 0.1,
+                                 ageb = TRUE)
 ```
-  </div>
-</div>
+:::
+
+::: grid-item
+Valladolid
+:::
+
+::: grid-item
+```{r}
+load("~/Library/CloudStorage/Dropbox/hotspots_2022/8.RData/cases_hotspots_agebs19.RData")
+library(magrittr)
+cases_hotspots_agebs19 |>
+    sf::st_make_valid() |>
+    dplyr::filter(loc == "Valladolid") |>
+denhotspots::staticmap_intensity(pal = rcartocolor::carto_pal,
+                                 pal_name = TRUE,
+                                 name = "OrYel",
+                                 breaks = 1,
+                                 dir_pal = -1,
+                                 x_leg = 0.5,
+                                 y_leg = 0.1,
+                                 ageb = TRUE)
+```
+
+:::
+
+::: grid-item
+```{r}
+load("~/Library/CloudStorage/Dropbox/hotspots_2022/8.RData/cases_hotspots_agebs19.RData")
+library(magrittr)
+cases_hotspots_agebs19 |>
+    sf::st_make_valid() |>
+    dplyr::filter(loc == "Merida") |>
+denhotspots::staticmap_intensity(pal = rcartocolor::carto_pal,
+                                 pal_name = TRUE,
+                                 name = "OrYel",
+                                 breaks = 1,
+                                 dir_pal = -1,
+                                 x_leg = 0.5,
+                                 y_leg = 0.1,
+                                 ageb = TRUE)
+```
+
+:::
+
+::: grid-item
+```{r}
+load("~/Library/CloudStorage/Dropbox/hotspots_2022/8.RData/cases_hotspots_agebs19.RData")
+library(magrittr)
+cases_hotspots_agebs19 |>
+    sf::st_make_valid() |>
+    dplyr::filter(loc == "Merida") |>
+denhotspots::staticmap_intensity(pal = rcartocolor::carto_pal,
+                                 pal_name = TRUE,
+                                 name = "OrYel",
+                                 breaks = 1,
+                                 dir_pal = -1,
+                                 x_leg = 0.5,
+                                 y_leg = 0.1,
+                                 ageb = TRUE)
+```
+:::
+
+:::
 
 </body>
 </html>
-
-
-
-
-
