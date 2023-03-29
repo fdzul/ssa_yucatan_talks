@@ -44,8 +44,12 @@ source("~/Dropbox/r_developments/r_new_functions/3.Functions/static_bump_map.R")
 library(sf)
 ```
 
-## [Panorama Epidemiológico]{style="color:#003300;"}
+## [ababba]{style="color:#003300"}
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
+![](https://journals.plos.org/plosntds/article?id=10.1371/journal.pntd.0006845){.absolute top="100" width="800" height="550" right="120"}
+
+## [Panorama Epidemiológico]{style="color:#003300;"}
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
 ```{r}
