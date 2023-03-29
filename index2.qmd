@@ -182,3 +182,471 @@ ggplot2::ggplot() +
 
 ```
 
+
+## [Panorama Epidemiológico]{style="color:#003300;"}
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+```{r}
+library(dplyr)
+rank_cases <- function(x){
+    x |>
+        dplyr::arrange(dplyr::desc(value)) |>
+        dplyr::mutate(rank = 1:dplyr::n())
+}
+
+
+# Step 1. load the dengue dataset 2008 to 2015 ####
+load("~/Library/CloudStorage/OneDrive-Personal/automatic_read_sinave/8.RData/den/den2008_2022.RData")
+
+z <- den2008_2015  |>
+    dplyr::filter(!DES_EDO.x %in% c("OTROS PAISES", 
+                                      "OTROS PAISES DE LATINOAMERICA",
+                                      "ESTADOS UNIDOS DE NORTEAMERICA")) |>
+    dplyr::filter(DES_DIAG_FINAL %in% c("FIEBRE HEMORRAGICA POR DENGUE", "FIEBRE POR DENGUE")) |>
+    dplyr::group_by(DES_EDO.x, ANO) |>
+    dplyr::summarise(value = dplyr::n(), .groups = "drop") |>
+    as.data.frame() |>
+    dplyr::group_by(ANO) |>
+    dplyr::rename(DES_EDO_RES = DES_EDO.x) |>
+    dplyr::mutate(CVE_EDO_RES = DES_EDO_RES) |>
+    #dplyr::mutate(rank = rank(value, ties.method = "random"))|> 
+    tidyr::nest() |>
+    dplyr::mutate(rank = purrr::map(data,
+                                    rank_cases)) |>
+    dplyr::select(-data) |>
+    tidyr::unnest(cols = c(rank)) |>
+    dplyr::mutate(ANO = as.numeric(ANO)) |>
+    as.data.frame()
+
+y <- den2016_2022 |>
+    dplyr::filter(!DES_EDO_RES %in% c("OTROS PAISES", 
+                                      "OTROS PAISES DE LATINOAMERICA",
+                                      "ESTADOS UNIDOS DE NORTEAMERICA")) |>
+    dplyr::filter(DES_DIAG_FINAL %in% 
+                      c("DENGUE CON SIGNOS DE ALARMA", 
+                        "DENGUE NO GRAVE", 
+                        "DENGUE GRAVE")) |>
+    dplyr::group_by(DES_EDO_RES, ANO) |>
+    dplyr::summarise(value = dplyr::n(), .groups = "drop") |>
+    dplyr::group_by(ANO) |>
+    dplyr::mutate(CVE_EDO_RES = DES_EDO_RES) |>
+    #dplyr::mutate(rank = rank(value, ties.method = "random"))|> 
+    tidyr::nest() |>
+    dplyr::mutate(rank = purrr::map(data,
+                                    rank_cases)) |>
+    dplyr::select(-data) |>
+    tidyr::unnest(cols = c(rank)) |>
+    dplyr::mutate(ANO = as.numeric(ANO)) |>
+    as.data.frame()
+
+
+w <-  boldenr::read_dataset_bol(path = "~/Library/CloudStorage/OneDrive-Personal/datasets/DGE/arbo/",
+                                     dataset = "sinave")  |>
+    dplyr::filter(!DES_EDO_RES %in% c("OTROS PAISES", 
+                                      "OTROS PAISES DE LATINOAMERICA",
+                                      "ESTADOS UNIDOS DE NORTEAMERICA")) |>
+    dplyr::filter(DES_DIAG_FINAL %in% 
+                      c("DENGUE CON SIGNOS DE ALARMA", 
+                        "DENGUE NO GRAVE", 
+                        "DENGUE GRAVE")) |>
+    dplyr::group_by(DES_EDO_RES, ANO) |>
+    dplyr::summarise(value = dplyr::n(), .groups = "drop") |>
+    dplyr::group_by(ANO) |>
+    dplyr::mutate(CVE_EDO_RES = DES_EDO_RES) |>
+    #dplyr::mutate(rank = rank(value, ties.method = "random"))|> 
+    tidyr::nest() |>
+    dplyr::mutate(rank = purrr::map(data,
+                                    rank_cases)) |>
+    dplyr::select(-data) |>
+    tidyr::unnest(cols = c(rank)) |>
+    dplyr::mutate(ANO = as.numeric(ANO)) |>
+    as.data.frame()
+
+zyw <- dplyr::bind_rows(z, y, w)
+
+col <- viridis::magma(n = length(unique(zyw$CVE_EDO_RES)))
+col[31]  <- "#2EB67D"
+
+
+ggplot2::ggplot(data = zyw,
+                ggplot2:::aes(ANO, 
+                              rank, 
+                              color = CVE_EDO_RES)) +
+    ggplot2::geom_point(size = 4) +
+    ggplot2::geom_text(data = zyw |> 
+                           dplyr::filter(ANO == min(ANO)),
+                       ggplot2::aes(x = ANO - .1, 
+                                    label = CVE_EDO_RES), 
+                       size = 1.5, 
+                       nudge_x = -0.1,
+                       hjust = 1) +
+    ggplot2::geom_text(data = zyw |> 
+                           dplyr::filter(ANO == max(ANO)),
+                       ggplot2::aes(x = ANO + .1, 
+                                    label = CVE_EDO_RES), 
+                       size = 1.5, 
+                       nudge_x = 0.1,
+                       hjust = 0) +
+    ggbump::geom_bump(size = 3, smooth = 8) +
+    ggplot2::scale_x_continuous(breaks = seq(1, max(zyw$ANO), 1)) +
+    cowplot::theme_minimal_grid(font_size = 14, 
+                                line_size = 0) +
+    ggplot2::theme(legend.position = "none",
+                   panel.grid.major = ggplot2::element_blank()) +
+    ggplot2::labs(y = "Posición de Casos Confirmados de Dengue",
+                  x = "") +
+    ggplot2::scale_y_reverse() +
+    ggplot2::scale_color_manual(values = col)
+```
+
+## [Manejo Integrado de Aedes en México]{style="color:#003300"}
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+
+
+
+
+## [Panorama Epidemiológico]{style="color:#003300;"}
+
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+::: column
+![](wavelet_analysis.png){.absolute top="100" width="800" height="550" right="120"}
+:::
+
+## [Panorama Epidemiológico]{style="color:#003300;"}
+
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+::: panel-tabset
+### 2022
+
+```{r bump_map_mun_2022}
+library(sf)
+static_bump_map(dataset = x,
+                year = "2022",
+                state = FALSE,
+                cve_edo = "31",
+                country_text_x = .01,
+                country_text_y = 0.024,
+                axis_start = 1,
+                value_text = 0.37,
+                size_text_value = 4,
+                line_size = 2,
+                size_text_country = 4,
+                pal_vir = "viridis") +
+    ggplot2::coord_sf(xlim = c(-90.5, -86))
+```
+
+### 2023
+
+```{r bump_map_mun_2023}
+static_bump_map(dataset = x,
+                year = "2023",
+                state = FALSE,
+                cve_edo = "31",
+                country_text_x = .01,
+                country_text_y = 0.024,
+                axis_start = 1,
+                value_text = 0.37,
+                size_text_value = 4,
+                line_size = 2,
+                size_text_country = 4,
+                pal_vir = "viridis") +
+    ggplot2::coord_sf(xlim = c(-90.5, -86))
+```
+:::
+
+## [Panorama Epidemiológico]{style="color:#003300;"}
+
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+```{r casos_semana_mpo}
+source("~/Library/CloudStorage/Dropbox/r_developments/r_new_functions/3.Functions/heatmap_confirmados.R")
+library(ggplot2)
+heatmap_confirmados(dataset = x, 
+                    year = 2023, 
+                    size_text = 3,
+                    state = "YUCATAN",
+                    JS = FALSE,
+                    MPO = TRUE,
+                    EDO = FALSE)
+```
+
+## [Transmisión Activa]{style="color:#003300;"}
+
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+```{r distribucion_dengue}
+if(as.vector(Sys.info()["sysname"]) == "Darwin"){
+    load("~/Library/CloudStorage/OneDrive-Personal/proyects/geocoding_mex/2023/9.geocoded_dataset/dengue_mx_2023.RData")
+    
+} else if(as.vector(Sys.info()["sysname"]) == "Windows"){
+    load("D:/OneDrive/proyects/geocoding_mex/2023/9.geocoded_dataset/dengue_mx_2023.RData")
+
+} else if(as.vector(Sys.info()["sysname"]) == "Linux"){
+    
+}
+
+z <- z |>
+    sf::st_as_sf(coords = c("long", "lat"),
+                 crs = 4326) |>
+    dplyr::mutate(ESTATUS_CASO = ifelse(ESTATUS_CASO == 1,
+                                   "Probable",
+                                   "Confirmado"))
+
+confirmados <- z |>
+    dplyr::filter(ESTATUS_CASO == "Confirmado")
+probables <- z |>
+    dplyr::filter(ESTATUS_CASO == "Probable")
+
+serotype_1 <- z |>
+    dplyr::filter(ESTATUS_CASO == "Confirmado") |>
+    dplyr::filter(DENGUE_SER_TRIPLEX == 1)
+serotype_2 <- z |>
+    dplyr::filter(ESTATUS_CASO == "Confirmado") |>
+    dplyr::filter(DENGUE_SER_TRIPLEX == 2)
+serotype_3 <- z |>
+    dplyr::filter(ESTATUS_CASO == "Confirmado") |>
+    dplyr::filter(DENGUE_SER_TRIPLEX == 3)
+serotype_4 <- z |>
+    dplyr::filter(ESTATUS_CASO == "Confirmado") |>
+    dplyr::filter(DENGUE_SER_TRIPLEX == 4)
+
+##############
+mapview::mapview(probables,
+                 col.regions = "#898F9C",
+                 color = "white",
+                 layer.name = "Probables") +
+    mapview::mapview(confirmados,
+                     col.regions = "#4267B2",
+                     color = "white",
+                     layer.name = "Positivos") +
+    mapview::mapview(serotype_1,
+                     col.regions = "#36C5F0",
+                     color = "white",
+                     layer.name = "DENV-1") +
+    mapview::mapview(serotype_2,
+                     col.regions = "#2EB67D",
+                     color = "white",
+                     layer.name = "DENV-2") +
+    mapview::mapview(serotype_3,
+                     col.regions = "#E01E5A",
+                     color = "white",
+                     layer.name = "DENV-3") +
+    mapview::mapview(serotype_4,
+                     col.regions = "#FC642D",#"#ECB22E",
+                     color = "white",
+                     layer.name = "DENV-4")
+```
+
+## [Transmisión Activa]{style="color:#003300;"}
+
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+```{r cadenas_transmision_confirmado}
+library(magrittr)
+if(as.vector(Sys.info()["sysname"]) == "Darwin"){
+    load("~/Library/CloudStorage/OneDrive-Personal/proyects/geocoding_mex/2023/9.geocoded_dataset/dengue_mx_2023.RData")
+    
+} else if(as.vector(Sys.info()["sysname"]) == "Windows"){
+    load("D:/OneDrive/proyects/geocoding_mex/2023/9.geocoded_dataset/dengue_mx_2023.RData")
+
+} else if(as.vector(Sys.info()["sysname"]) == "Linux"){
+    
+}
+
+denhotspots::transmission_chains_map(geocoded_dataset = z,
+                                     cve_edo = "31",
+                                     locality = NULL,
+                                     dengue_cases = "Confirmado")
+```
+
+## [Vigilancia Entomológica]{style="color:#003300;"}
+
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+```{r indicador_ovitrampas_by_ovitrap,fig.show = "hold",fig.align = "center"}
+source("~/Dropbox/r_developments/r_new_functions/3.Functions/ovitraps_occupancy_abundancy.R")
+
+path_vect <- "/Users/fdzul/Library/CloudStorage/OneDrive-Personal/datasets/CENAPRECE/2023/31_yucatan"
+ovitraps_occupancy_abundancy(ovitraps_path = path_vect,
+                             scale = "ovitraps")
+
+```
+
+## [Vigilancia Entomológica]{style="color:#003300;"}
+
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+::: panel-tabset
+### Mérida
+
+```{r vector_hotspots_merida}
+# step 1. define the path for the historic dataset ####
+path_vect <- "/Users/fdzul/Library/CloudStorage/OneDrive-Personal/datasets/CENAPRECE/2023/31_yucatan"
+path_coord <- paste(path_vect, "DescargaOvitrampasMesFco.txt", sep = "/")
+
+
+library(sf)
+# Step 2. run the spde model ####
+merida_2023 <- deneggs::eggs_hotspots_week(cve_mpo = "050",
+                                           cve_edo = "31",
+                                           year = "2023",
+                                           hist_dataset = FALSE,
+                                           locality = "Mérida",
+                                           path_vect = path_vect,
+                                           path_coord = path_coord,
+                                           integration_strategy = "eb",
+                                           aproximation_method = "gaussian",
+                                           fam_distribution = "zeroinflatednbinomial1",
+                                           kvalue = 40,
+                                           plot = FALSE,
+                                           palette.viridis = "viridis",
+                                           cell.size = 500,
+                                           alpha.value = .99)
+
+# Step 3. Visualize the hotspots intensity #### 
+deneggs::eggs_hotspots_intensity_map(spde_betas = merida_2023$betas,
+                                     years = 2023,
+                                     locality = "Mérida",
+                                     cve_ent = "31",
+                                     palette = rcartocolor::carto_pal,
+                                     name = "SunsetDark")
+```
+
+### Valladolid
+
+```{r vector_hotspots_valladolid}
+# step 1. define the path for the historic dataset ####
+path_vect <- "/Users/fdzul/Library/CloudStorage/OneDrive-Personal/datasets/CENAPRECE/2023/31_yucatan"
+path_coord <- paste(path_vect, "DescargaOvitrampasMesFco.txt", sep = "/")
+
+
+library(sf)
+# Step 2. run the spde model ####
+x <- deneggs::eggs_hotspots_week(cve_mpo = "102",
+                                           cve_edo = "31",
+                                           year = "2023",
+                                           hist_dataset = FALSE,
+                                           locality = "Valladolid",
+                                           path_vect = path_vect,
+                                           path_coord = path_coord,
+                                           integration_strategy = "eb",
+                                           aproximation_method = "gaussian",
+                                           fam_distribution = "zeroinflatednbinomial1",
+                                           kvalue = 40,
+                                           plot = FALSE,
+                                           palette.viridis = "viridis",
+                                           cell.size = 500,
+                                           alpha.value = .99)
+
+# Step 3. Visualize the hotspots intensity #### 
+deneggs::eggs_hotspots_intensity_map(spde_betas = x$betas,
+                                     years = 2023,
+                                     locality = "Valladolid",
+                                     cve_ent = "31",
+                                     palette = rcartocolor::carto_pal,
+                                     name = "SunsetDark")
+```
+:::
+
+## [Accciones de Control (Mérida)]{style="color:#003300;"}
+
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+```{r cl_merida}
+library(sf)
+# Step 1 load the larvae control function ####
+source("~/Dropbox/r_developments/r_new_functions/3.Functions/joint_cl_blocks.R")
+path_control_yuc <- "/Users/fdzul/Library/CloudStorage/OneDrive-Personal/datasets/CENAPRECE/2023/31_yucatan/"
+
+# Step 2.1 test the function with yucatan state ####
+cl_yuc <- joint_cl_blocks(path_vector = path_control_yuc,
+                          cve_ent = 31)
+
+# Step 3. load the larvae_control_map function ####
+source("~/Library/CloudStorage/Dropbox/r_developments/r_new_functions/3.Functions/boldenr/cl_mapview.R")
+# Step 4. test the larvae_control_map function with yucatan ####
+a <- cl_mapview(cl_dataset = cl_yuc,
+           cve_edo = "31",
+           locality = c("Mérida", "Uman", "Kanasin"),
+           time = "cumulative",
+           cl_type = "Barrido")
+b <- cl_mapview(cl_dataset = cl_yuc,
+           cve_edo = "31",
+           locality = c("Mérida", "Uman", "Kanasin"),
+           time = "cumulative",
+           cl_type = "Focalizado")
+leafsync::sync(a, b)
+```
+
+## [Accciones de Control (Valladolid)]{style="color:#003300;"}
+
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+```{r cl_valladolid}
+library(sf)
+# Step 1 load the larvae control function ####
+source("~/Dropbox/r_developments/r_new_functions/3.Functions/joint_cl_blocks.R")
+path_control_yuc <- "/Users/fdzul/Library/CloudStorage/OneDrive-Personal/datasets/CENAPRECE/2023/31_yucatan/"
+
+# Step 2.1 test the function with yucatan state ####
+cl_yuc <- joint_cl_blocks(path_vector = path_control_yuc,
+                          cve_ent = 31)
+
+# Step 3. load the larvae_control_map function ####
+source("~/Library/CloudStorage/Dropbox/r_developments/r_new_functions/3.Functions/boldenr/cl_mapview.R")
+# Step 4. test the larvae_control_map function with yucatan ####
+cl_mapview(cl_dataset = cl_yuc,
+           cve_edo = "31",
+           locality = c("Valladolid"),
+           time = "cumulative",
+           cl_type = "Focalizado")
+```
+
+## [Control de Probables (Mérida)]{style="color:#003300;"}
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+```{r cp_merida_2023}
+# Step 1. define the path ####
+path <- "/Users/fdzul/Library/CloudStorage/OneDrive-Personal/datasets/CENAPRECE/2023/31_yucatan/"
+
+# Step 2. load the function ####
+source("~/Library/CloudStorage/Dropbox/r_developments/r_new_functions/3.Functions/boldenr/control_probables_graph.R")
+
+# Step 3. run the function ####
+control_probables_graph(path = path,
+                        cve_edo = "31",
+                        js = "Mérida")
+```
+
+
+## [Control de Probables (Valladolid)]{style="color:#003300;"}
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+```{r cp_valladolid_2023}
+# Step 1. define the path ####
+path <- "/Users/fdzul/Library/CloudStorage/OneDrive-Personal/datasets/CENAPRECE/2023/31_yucatan/"
+
+# Step 2. load the function ####
+source("~/Library/CloudStorage/Dropbox/r_developments/r_new_functions/3.Functions/boldenr/control_probables_graph.R")
+
+# Step 3. run the function ####
+control_probables_graph(path = path,
+                        cve_edo = "31",
+                        js = "Valladolid")
+```
+
+
+
+## [Dios Botic]{style="color:#003300;"}
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+-   ***Bio*** : https://fdzul.github.io/web_site_fadm/
+
+-   ***email*** : [felipe.dzul.m\@gmail.com]()
+
+-   ***celular*** : [8139945623]()
+
+-   ***slides***: https://joyful-palmier-ec5e33.netlify.app/talks/reunion_interstatal/#/
