@@ -1,0 +1,60 @@
+---
+format: 
+  revealjs:
+    #theme: ["theme/q-theme.scss"]
+    slide-number: c/t
+    logo: "https://salud.yucatan.gob.mx/files/get/2889?v=1669754780"
+    footer: "[github.com/fdzul](https://joyful-palmier-ec5e33.netlify.app/talks/reunion_interstatal/#/)"
+    center-title-slide: true
+highlight-style: a11y
+---
+
+<h2>Plan Interestatal de Prevención y Control del Dengue<br>en Yucatán</h2>
+
+<h2>
+
+</h2>
+
+<hr>
+
+<h3>Felipe Dzul Manzanilla</h3>
+
+<h3>Jorge Palacios</h3>
+
+<h3>
+
+</h3>
+
+<h4>2023-04-05</h4>
+
+<br>
+
+<h4>
+
+`r fontawesome::fa("github", "black")` [github.com/fdzul](https://fdzul.github.io/web_site_fadm/)
+
+![](chains_merida.jpg){.absolute top="155" left="550" width="750"}
+
+```{r setup}
+path_arbo <- "/Users/fdzul/Library/CloudStorage/OneDrive-Personal/datasets/DGE/arbo/"
+# 3.1 arbovirosis dataset
+x <- boldenr::read_dataset_bol(path = path_arbo,
+                                dataset = "sinave")
+source("~/Dropbox/r_developments/r_new_functions/3.Functions/static_bump_map.R")
+library(sf)
+```
+
+
+## [Manejo Integrado de Aedes]{style="color:#003300"}
+
+<figure>
+<img src="https://journals.plos.org/plosntds/article/figure/image?size=large&amp;id=10.1371/journal.pntd.0006845.g001"/>
+
+</figcaption>
+
+</figure>
+
+## [Manejo Integrado de Aedes]{style="color:#003300"}
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+![](https://journals.plos.org/plosntds/article/figure/image?size=large&amp;id=10.1371/journal.pntd.0006845.g001){.absolute top="100" width="800" height="550" right="120"}
