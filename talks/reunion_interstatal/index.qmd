@@ -310,8 +310,7 @@ ggplot2::ggplot() +
 
 ```
 
-## [Transmisión Persistente]{style="color:#003300"}
-
+## [Transmisión Persistente (Hotspots)]{style="color:#003300"}
 <hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
 
 <html>
@@ -327,7 +326,7 @@ ggplot2::ggplot() +
 .grid-item {
   background-color: rgba(255, 255, 255, 0.8);
   border: 1px solid rgba(0, 0, 0, 0.8);
-  padding: 20px;
+  padding: 5px;
   font-size: 30px;
   text-align: center;
 }
@@ -363,7 +362,7 @@ Mérida
 :::
 
 ::: grid-item
-```{r}
+```{r hotspots_cases_merida, out.height="110%", out.width="110%"}
 load("~/Library/CloudStorage/Dropbox/hotspots_2022/8.RData/cases_hotspots_agebs19.RData")
 library(magrittr)
 cases_hotspots_agebs19 |>
@@ -378,37 +377,39 @@ denhotspots::staticmap_intensity(pal = rcartocolor::carto_pal,
                                  y_leg = 0.1,
                                  ageb = TRUE)
 ```
-
 :::
 
 ::: grid-item
-```{r}
+```{r hotspots_vector_merida, out.height="110%", out.width="110%"}
+source("~/Library/CloudStorage/Dropbox/r_developments/r_talks/2023/ssa_yucatan_talks/talks/reunion_interstatal/functions/intensity_eggs.R")
 load("~/Library/CloudStorage/OneDrive-Personal/proyects/hotspots_eggs/8.RData/31_yucatan/betas/31_yucatan_zinb1_betas.RData")
-source("~/Library/CloudStorage/Dropbox/r_developments/r_new_functions/3.Functions/eggs_hotspots_intensity_map_year.R")
-eggs_hotspots_intensity_map_year(betas = betas_31_yucatan,
-                                 locality = "Merida",
-                                 cve_ent = "31",
-                                 palette = rcartocolor::carto_pal,
-                                 name = "SunsetDark")
+betas_31_yucatan |>
+    dplyr::filter(year == 2019) |>
+    intensity_eggs(locality = "Mérida",
+                    cve_ent = "31",
+                    palette = rcartocolor::carto_pal,
+                    name = "SunsetDark")
 ```
-
 :::
 
 ::: grid-item
-```{r}
+```{r risk_merida, out.height="110%", out.width="110%"}
+# load the dengue cases hotspots
 load("~/Library/CloudStorage/Dropbox/hotspots_2022/8.RData/cases_hotspots_agebs19.RData")
-library(magrittr)
-cases_hotspots_agebs19 |>
-    sf::st_make_valid() |>
-    dplyr::filter(loc == "Merida") |>
-denhotspots::staticmap_intensity(pal = rcartocolor::carto_pal,
-                                 pal_name = TRUE,
-                                 name = "OrYel",
-                                 breaks = 1,
-                                 dir_pal = -1,
-                                 x_leg = 0.5,
-                                 y_leg = 0.1,
-                                 ageb = TRUE)
+hotspots <- cases_hotspots_agebs19 |>
+    sf::st_make_valid()
+# load the betas 
+load("~/Library/CloudStorage/OneDrive-Personal/proyects/hotspots_eggs/8.RData/31_yucatan/betas/31_yucatan_zinb1_betas.RData")
+
+###
+source("~/Library/CloudStorage/Dropbox/r_developments/r_new_functions/3.Functions/risk_agebs.R")
+source("~/Library/CloudStorage/Dropbox/r_developments/r_new_functions/3.Functions/risk_map.R")
+risk <- risk_agebs(spde_model = betas_31_yucatan,
+                   hotspots = cases_hotspots_agebs19,
+                   locality = "Mérida",
+                   cve_ent = "31",
+                   intensity_perc = 25)
+risk_map(risk = risk, staticmap = TRUE) 
 ```
 :::
 
@@ -417,7 +418,7 @@ Valladolid
 :::
 
 ::: grid-item
-```{r}
+```{r hotspots_cases_valladolid, out.height="110%", out.width="100%"}
 load("~/Library/CloudStorage/Dropbox/hotspots_2022/8.RData/cases_hotspots_agebs19.RData")
 library(magrittr)
 cases_hotspots_agebs19 |>
@@ -432,43 +433,39 @@ denhotspots::staticmap_intensity(pal = rcartocolor::carto_pal,
                                  y_leg = 0.1,
                                  ageb = TRUE)
 ```
-
 :::
 
 ::: grid-item
-```{r}
-load("~/Library/CloudStorage/Dropbox/hotspots_2022/8.RData/cases_hotspots_agebs19.RData")
-library(magrittr)
-cases_hotspots_agebs19 |>
-    sf::st_make_valid() |>
-    dplyr::filter(loc == "Merida") |>
-denhotspots::staticmap_intensity(pal = rcartocolor::carto_pal,
-                                 pal_name = TRUE,
-                                 name = "OrYel",
-                                 breaks = 1,
-                                 dir_pal = -1,
-                                 x_leg = 0.5,
-                                 y_leg = 0.1,
-                                 ageb = TRUE)
+```{r hotspots_vector_valladolid, out.height="110%", out.width="110%"}
+source("~/Library/CloudStorage/Dropbox/r_developments/r_talks/2023/ssa_yucatan_talks/talks/reunion_interstatal/functions/intensity_eggs.R")
+load("~/Library/CloudStorage/OneDrive-Personal/proyects/hotspots_eggs/8.RData/31_yucatan/betas/31_yucatan_zinb1_betas.RData")
+betas_31_yucatan |>
+    dplyr::filter(year == 2019) |>
+    intensity_eggs(locality = "Valladolid",
+                    cve_ent = "31",
+                    palette = rcartocolor::carto_pal,
+                    name = "SunsetDark")
 ```
-
 :::
 
 ::: grid-item
-```{r}
+```{r risk_valladolid, out.height="110%", out.width="110%"}
+# load the dengue cases hotspots
 load("~/Library/CloudStorage/Dropbox/hotspots_2022/8.RData/cases_hotspots_agebs19.RData")
-library(magrittr)
-cases_hotspots_agebs19 |>
-    sf::st_make_valid() |>
-    dplyr::filter(loc == "Merida") |>
-denhotspots::staticmap_intensity(pal = rcartocolor::carto_pal,
-                                 pal_name = TRUE,
-                                 name = "OrYel",
-                                 breaks = 1,
-                                 dir_pal = -1,
-                                 x_leg = 0.5,
-                                 y_leg = 0.1,
-                                 ageb = TRUE)
+hotspots <- cases_hotspots_agebs19 |>
+    sf::st_make_valid()
+# load the betas 
+load("~/Library/CloudStorage/OneDrive-Personal/proyects/hotspots_eggs/8.RData/31_yucatan/betas/31_yucatan_zinb1_betas.RData")
+
+###
+source("~/Library/CloudStorage/Dropbox/r_developments/r_new_functions/3.Functions/risk_agebs.R")
+source("~/Library/CloudStorage/Dropbox/r_developments/r_new_functions/3.Functions/risk_map.R")
+risk <- risk_agebs(spde_model = betas_31_yucatan,
+                   hotspots = cases_hotspots_agebs19,
+                   locality = "Valladolid",
+                   cve_ent = "31",
+                   intensity_perc = 25)
+risk_map(risk = risk, staticmap = TRUE) 
 ```
 :::
 
@@ -476,3 +473,89 @@ denhotspots::staticmap_intensity(pal = rcartocolor::carto_pal,
 
 </body>
 </html>
+
+
+## [Transmisión Reciente]{style="color:#003300"}
+<hr style="height:2px;border-width:0;color:#330019;background-color:#330019">
+
+<html>
+<head>
+```{=html}
+<style>
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  padding: 5px;
+}
+
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 5px;
+  font-size: 30px;
+  text-align: center;
+}
+</style>
+```
+</head>
+<body>
+<h1>
+</h1>
+<p>
+</p>
+
+::: grid-container
+
+::: grid-item
+Localidad
+:::
+
+::: grid-item
+Transmisión
+:::
+
+::: grid-item
+Vector
+:::
+
+::: grid-item
+Escenarios
+:::
+
+::: grid-item
+Mérida
+:::
+
+::: grid-item
+![](eggs_hotspots_2023_merida.jpg)
+:::
+
+::: grid-item
+![](eggs_hotspots_2023_merida.jpg)
+:::
+
+::: grid-item
+![](eggs_hotspots_2023_merida.jpg)
+:::
+
+::: grid-item
+Valladolid
+:::
+
+::: grid-item
+![](eggs_hotspots_2023_valladolid.jpg)
+:::
+
+::: grid-item
+![](eggs_hotspots_2023_valladolid.jpg)
+:::
+
+::: grid-item
+![](eggs_hotspots_2023_valladolid.jpg)
+:::
+
+:::
+
+</body>
+</html>
+
